@@ -9,20 +9,13 @@ export const metadata: Metadata = {
   title: "Marci Metzger | Pahrump Real Estate Expert",
   description: "Experience excellence with Marci Metzger, a premier real estate broker with over 30 years of expertise in the Pahrump Valley and Ridge Realty Group.",
   keywords: ["Pahrump Real Estate", "Mountain Falls Homes", "Marci Metzger", "Ridge Realty Group", "Nevada Broker"],
-  // Favicon Logic
+  
+  // Cleaned up for a single icon
   icons: {
-    icon: [
-      {
-        url: "/icon-light.ico", // light logo for dark browser tabs
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark.ico", // dark logo for light browser tabs
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-    apple: "/apple-touch-icon.png", // For iPhone/iPad home screens
+    icon: "/favicon.ico", // Replace with your actual filename (e.g., "/logo.png")
+    apple: "/apple-icon.png", // Usually safe to use the same if you don't have a specific apple-touch-icon
   },
+
   openGraph: {
     title: "Marci Metzger | Luxury Pahrump Real Estate",
     description: "30 Years of Excellence. Over $250M in Closed Volume.",
