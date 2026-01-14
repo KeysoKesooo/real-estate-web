@@ -1,39 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Marquee Variables */
-  --animate-marquee-vertical: marquee-vertical var(--speed, 60s) linear infinite;
-  --animate-marquee-vertical-reverse: marquee-vertical-reverse var(--speed, 60s) linear infinite;
+  /* Existing Hero Background Animation */
+  --animate-marquee-vertical: marquee-vertical 60s linear infinite;
   
-  /* Main Gallery Stream */
+  /* New Gallery Stream Animation */
   --animate-gallery-stream: gallery-stream 40s linear infinite;
 
   --font-serif: var(--font-playfair), serif;
   --font-sans: var(--font-inter), sans-serif;
 
-  /* Moves Upwards */
   @keyframes marquee-vertical {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
   }
 
-  /* Moves Downwards */
-  @keyframes marquee-vertical-reverse {
-    0% { transform: translateY(-50%); }
-    100% { transform: translateY(0); }
-  }
-
-  /* FIX: Use a full 1px offset. 
-     This ensures the image content always "bleeds" over the 
-     container edge to hide sub-pixel rendering gaps (the black lines).
-  */
   @keyframes gallery-stream {
-    0% { 
-      transform: translateY(-1px); 
-    }
-    100% { 
-      transform: translateY(calc(-50% - 1px)); 
-    }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
   }
 }
 
