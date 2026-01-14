@@ -1,25 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* Existing Hero Background Animation */
-  --animate-marquee-vertical: marquee-vertical 60s linear infinite;
-  
-  /* New Gallery Stream Animation */
-  --animate-gallery-stream: gallery-stream 40s linear infinite;
 
   --font-serif: var(--font-playfair), serif;
   --font-sans: var(--font-inter), sans-serif;
-
+/* UP Animation */
   @keyframes marquee-vertical {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
   }
 
+  /* DOWN Animation */
+  @keyframes marquee-vertical-reverse {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+
+  --animate-marquee-vertical: marquee-vertical var(--speed, 30s) linear infinite;
+  --animate-marquee-vertical-reverse: marquee-vertical-reverse var(--speed, 30s) linear infinite;
+
   @keyframes gallery-stream {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
   }
+
+    --animate-gallery-stream: gallery-stream 40s linear infinite;
 }
+
 
 html {
   scroll-behavior: smooth;
