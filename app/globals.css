@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* We remove the hardcoded '60s' and use a fallback variable. 
-     This allows you to override speed in React using style={{ '--speed': '20s' }}
-  */
+  /* Marquee Variables */
   --animate-marquee-vertical: marquee-vertical var(--speed, 60s) linear infinite;
   --animate-marquee-vertical-reverse: marquee-vertical-reverse var(--speed, 60s) linear infinite;
   
+  /* Main Gallery Stream */
   --animate-gallery-stream: gallery-stream 40s linear infinite;
 
   --font-serif: var(--font-playfair), serif;
@@ -24,9 +23,17 @@
     100% { transform: translateY(0); }
   }
 
+  /* FIX: Use a full 1px offset. 
+     This ensures the image content always "bleeds" over the 
+     container edge to hide sub-pixel rendering gaps (the black lines).
+  */
   @keyframes gallery-stream {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
+    0% { 
+      transform: translateY(-1px); 
+    }
+    100% { 
+      transform: translateY(calc(-50% - 1px)); 
+    }
   }
 }
 

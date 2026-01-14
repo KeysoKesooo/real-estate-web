@@ -29,39 +29,45 @@ export default function MasonryBackground() {
   const [shuffledImages, setShuffledImages] = useState<string[]>([]);
 
   useEffect(() => {
-    const shuffle = [...images].sort(() => Math.random() - 0.5);
-    setShuffledImages(shuffle);
+    setShuffledImages([...images].sort(() => Math.random() - 0.5));
   }, []);
 
   if (shuffledImages.length === 0) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden z-0 opacity-[0.15] pointer-events-none bg-white">
-      {/* Container is now static, animation happens on children */}
-      <div className="flex gap-6 h-full px-4">
+    <div className="absolute inset-0 overflow-hidden z-0 opacity-20 pointer-events-none bg-white">
+      {/* Main Container: 
+          - On Mobile: Only show 2-3 columns 
+          - On Desktop: Show 6 columns
+      */}
+      <div className="flex gap-4 md:gap-8 h-full px-4 justify-center">
         {[...Array(6)].map((_, colIdx) => {
           const colImages = shuffledImages.slice(colIdx * 3, (colIdx + 1) * 3);
-          
-          // Determine direction: Even columns move up, Odd columns move down
           const isEven = colIdx % 2 === 0;
-          const animationClass = isEven ? "animate-marquee-vertical" : "animate-marquee-vertical-reverse";
           
           return (
             <div 
               key={colIdx} 
-              // Animation applied here individually
-              className={`flex flex-col gap-6 flex-1 ${animationClass}`}
-              style={{ 
-                // We add a custom duration so they don't move at the exact same speed
-                animationDuration: `${30 + colIdx * 5}s` 
-              }}
+              className={`
+                flex flex-col gap-4 md:gap-8 shrink-0 
+                /* Fixed width prevents the "polkadot" effect */
+                w-[140px] md:w-[240px] lg:w-[300px]
+                /* Hide columns 3-5 on small screens */
+                ${colIdx > 2 ? 'hidden lg:flex' : colIdx > 1 ? 'hidden md:flex' : 'flex'}
+                ${isEven ? "animate-marquee-vertical" : "animate-marquee-vertical-reverse"}
+              `}
+              style={{ '--speed': `${30 + colIdx * 5}s` } as React.CSSProperties}
             >
               {[...colImages, ...colImages, ...colImages].map((img, imgIdx) => (
                 <div
                   key={imgIdx}
-                  className="w-full aspect-square rounded-[2rem] bg-slate-100 shadow-sm border border-slate-200/50"
+                  className={`
+                    w-full rounded-[1.5rem] md:rounded-[2.5rem] bg-slate-100 shadow-sm border border-slate-200/50
+                    /* Alternating heights for Pinterest look */
+                    ${(imgIdx + colIdx) % 2 === 0 ? 'aspect-[3/4]' : 'aspect-square'}
+                  `}
                   style={{
-                    backgroundImage: `url(${img}?auto=format&fit=crop&w=400)`,
+                    backgroundImage: `url(${img}?auto=format&fit=crop&w=600)`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                   }}
@@ -72,7 +78,8 @@ export default function MasonryBackground() {
         })}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-white/40 to-white" />
+      {/* Gradients to keep the text readable */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
     </div>
   );
 }
