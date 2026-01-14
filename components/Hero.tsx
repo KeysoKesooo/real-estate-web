@@ -2,7 +2,7 @@ import MasonryBackground from './MasonryBackground';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <MasonryBackground />
 
       <div className="relative z-10 text-center px-6 max-w-4xl">

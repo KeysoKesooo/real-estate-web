@@ -3,9 +3,6 @@
 import React, { useState, useEffect } from 'react';
 
 export default function MasonryBackground() {
-  // We use a single uniform aspect ratio to match the "Showcase" symmetry
-  // instead of the staggered 'heights' array.
-  
   const images = [
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
     "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
@@ -29,12 +26,9 @@ export default function MasonryBackground() {
     "https://images.unsplash.com/photo-1416331108676-a22ccb276e35"
   ];
 
-
-
   const [shuffledImages, setShuffledImages] = useState<string[]>([]);
 
   useEffect(() => {
-    // Shuffling on mount to ensure columns don't look identical
     const shuffle = [...images].sort(() => Math.random() - 0.5);
     setShuffledImages(shuffle);
   }, []);
@@ -43,22 +37,28 @@ export default function MasonryBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden z-0 opacity-[0.15] pointer-events-none bg-white">
-      {/* Grid Container: 
-          - flex gap-6 to match the whitespace in your showcase 
-          - h-[200%] for the vertical animation loop
-      */}
-      <div className="flex gap-6 animate-marquee-vertical h-[200%] px-4">
+      {/* Container is now static, animation happens on children */}
+      <div className="flex gap-6 h-full px-4">
         {[...Array(6)].map((_, colIdx) => {
-          // Slice images for each column so they are unique
           const colImages = shuffledImages.slice(colIdx * 3, (colIdx + 1) * 3);
           
+          // Determine direction: Even columns move up, Odd columns move down
+          const isEven = colIdx % 2 === 0;
+          const animationClass = isEven ? "animate-marquee-vertical" : "animate-marquee-vertical-reverse";
+          
           return (
-            <div key={colIdx} className="flex flex-col gap-6 flex-1">
-              {/* Double items for seamless animation loop */}
-              {[...colImages, ...colImages, ...colImages, ...colImages].map((img, imgIdx) => (
+            <div 
+              key={colIdx} 
+              // Animation applied here individually
+              className={`flex flex-col gap-6 flex-1 ${animationClass}`}
+              style={{ 
+                // We add a custom duration so they don't move at the exact same speed
+                animationDuration: `${30 + colIdx * 5}s` 
+              }}
+            >
+              {[...colImages, ...colImages, ...colImages].map((img, imgIdx) => (
                 <div
                   key={imgIdx}
-                  // Using aspect-square to match the clean, symmetrical look of the showcase cards
                   className="w-full aspect-square rounded-[2rem] bg-slate-100 shadow-sm border border-slate-200/50"
                   style={{
                     backgroundImage: `url(${img}?auto=format&fit=crop&w=400)`,
@@ -72,9 +72,6 @@ export default function MasonryBackground() {
         })}
       </div>
 
-      {/* Sophisticated Masking:
-          - Uses a heavier white gradient at top/bottom to make the HERO content pop
-      */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white/40 to-white" />
     </div>
   );

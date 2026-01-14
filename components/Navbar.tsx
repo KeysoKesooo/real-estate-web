@@ -35,14 +35,14 @@ const Navbar = () => {
             <Link href="#home" className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium text-slate-600 hover:text-blue-600 transition whitespace-nowrap">
               Home
             </Link>
-            <Link href="#showcase" className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium text-slate-600 hover:text-blue-600 transition whitespace-nowrap">
-              Listing
+            <Link href="#listings" className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium text-slate-600 hover:text-blue-600 transition whitespace-nowrap">
+              Listings
             </Link>
           </div>
 
           {/* Center Logo - Remains centered on all screens */}
           <div className="flex-none text-center mx-0 md:mx-16 lg:mx-24">
-            <Link href="#cta" onClick={() => setIsOpen(false)} className="group inline-block">
+            <Link href="#letsmove" onClick={() => setIsOpen(false)} className="group inline-block">
               <h1 className="text-xl md:text-3xl font-serif tracking-tight text-slate-900 leading-none">
                 MARCI METZGER
               </h1>
@@ -80,7 +80,7 @@ const Navbar = () => {
           
           {[
             { name: "Home", href: "#home" },
-            { name: "Listing", href: "#showcase" },
+            { name: "Listing", href: "#listings" },
             { name: "Showcase", href: "#gallery" },
             { name: "Contact", href: "#about" }
           ].map((link, i) => (

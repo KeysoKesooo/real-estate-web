@@ -1,18 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* Existing Hero Background Animation */
-  --animate-marquee-vertical: marquee-vertical 60s linear infinite;
+  /* We remove the hardcoded '60s' and use a fallback variable. 
+     This allows you to override speed in React using style={{ '--speed': '20s' }}
+  */
+  --animate-marquee-vertical: marquee-vertical var(--speed, 60s) linear infinite;
+  --animate-marquee-vertical-reverse: marquee-vertical-reverse var(--speed, 60s) linear infinite;
   
-  /* New Gallery Stream Animation */
   --animate-gallery-stream: gallery-stream 40s linear infinite;
 
   --font-serif: var(--font-playfair), serif;
   --font-sans: var(--font-inter), sans-serif;
 
+  /* Moves Upwards */
   @keyframes marquee-vertical {
     0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
+  }
+
+  /* Moves Downwards */
+  @keyframes marquee-vertical-reverse {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
   }
 
   @keyframes gallery-stream {

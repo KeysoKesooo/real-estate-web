@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Showcase() {
   return (
-    <section id="showcase" className="bg-[#F8F9FA] py-24 px-6">
+    <section id="listings" className="bg-[#F8F9FA] py-24 px-6">
       <div className="max-w-7xl mx-auto">
         
         {/* Simple Header */}
