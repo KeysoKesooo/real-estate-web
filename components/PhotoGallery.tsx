@@ -54,7 +54,7 @@ const PhotoGallery: React.FC = () => {
   if (shuffledImages.length === 0) return null;
 
   return (
-    <section id="gallery" className="py-16 md:py-24 bg-white overflow-hidden">
+    <section id="gallery" className="scroll-mt-24 py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-8 md:mb-8 text-center">
         <h2 className="text-4xl md:text-5xl font-serif text-slate-900 mb-4">
           The Signature <span className="italic text-blue-600">Selection</span>
